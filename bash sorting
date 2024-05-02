@@ -1,0 +1,47 @@
+this is the code for checking minimum columns:
+||
+min=1000
+while read LINE
+do
+    fields=$(echo "$LINE" | awk -F, '{print NF}')
+    if [ $min -gt $fields ]
+    then
+        min=$fields
+    fi
+done < club_records.csv
+echo "Minimum number of fields: $min"
+||
+
+this code is for removing extra columns using the above value:
+||
+while read LINE
+do
+    cut -d',' -f1-$min club_records.csv
+  echo "${LINE}"
+done < /etc/fstab
+||
+final automation:
+||
+curl cuckoo.tar.gz
+
+tar xvfz cuckoo.tar.gz
+
+find -name club_records.csv
+
+min=1000
+while read LINE
+do
+    fields=$(echo "$LINE" | awk -F, '{print NF}')
+    if [ $min -gt $fields ]
+    then
+        min=$fields
+    fi
+done < club_records.csv
+echo "Minimum number of fields: $min"
+
+while read LINE
+do
+    cut -d',' -f1-$min club_records.csv
+  echo "${LINE}"
+done < /etc/fstab
+||
